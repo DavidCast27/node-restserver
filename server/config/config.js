@@ -15,7 +15,11 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe';
 } else {
-    urlDB = 'mongodb://cafe-user:1234qwer@ds051635.mlab.com:51635/cafe-node';
+    urlDB = process.env.MONGO_URI;
 }
-// urlDB = 'mongodb://cafe-user:Apolo1618@ds051635.mlab.com:51635/cafe-node';
 process.env.URLDB = urlDB;
+
+//CREAR UNA VARIABLE DE ENTORNO EN HEROKU (CLI)
+//heroku config:set <nombre_variable> = <valor>
+//heroku config:get <nombre_variable>
+//heroku config:unset <nombre_variable>
