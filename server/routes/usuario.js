@@ -7,7 +7,9 @@ const Usuario = require('../models/usuario');
 
 const app = express();
 
-app.get('/usuario', function(req, res) {
+const { verificarToken, verificarAdminRole } = require('../middlewares/auth');
+
+app.get('/usuario', verificarToken, (req, res) => {
     let desde = req.query.desde || 0;
     desde = Number(desde);
     let limit = req.query.limite || 5
@@ -34,7 +36,7 @@ app.get('/usuario', function(req, res) {
         })
 })
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificarToken, verificarAdminRole], (req, res) => {
     let body = req.body;
     let usuarioActual = new Usuario({
         nombre: body.nombre,
@@ -56,7 +58,7 @@ app.post('/usuario', function(req, res) {
     });
 })
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificarToken, verificarAdminRole], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'estado', 'img', 'role']);
 
@@ -89,7 +91,7 @@ app.put('/usuario/:id', function(req, res) {
 })
 
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificarToken, verificarAdminRole], (req, res) => {
     let id = req.params.id;
     let body = { estado: false }
     let query = { _id: id };
