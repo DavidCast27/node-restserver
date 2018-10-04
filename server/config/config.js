@@ -29,6 +29,11 @@ if (process.env.NODE_ENV === 'dev') {
 }
 process.env.URLDB = urlDB;
 
+//==============================
+//Google client ID
+//==============================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '1037194527497-fricon5s6sg4akpot4k5j601d3c8j5s5.apps.googleusercontent.com';
+
 //CREAR UNA VARIABLE DE ENTORNO EN HEROKU (CLI)
 //heroku config:set <nombre_variable> = <valor>
 //heroku config:get <nombre_variable>
