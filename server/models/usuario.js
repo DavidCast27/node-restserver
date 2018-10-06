@@ -52,4 +52,4 @@ usuarioSchema.plugin(uniqueValidator, {
 });
 
 
-module.exports = mongoose.model('usuario', usuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);

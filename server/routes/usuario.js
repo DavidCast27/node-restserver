@@ -1,13 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const Usuario = require('../models/usuario');
-
-
-
-const app = express();
 
 const { verificarToken, verificarAdminRole } = require('../middlewares/auth');
+
+const app = express();
+const Usuario = require('../models/usuario');
 
 app.get('/usuario', verificarToken, (req, res) => {
     let desde = req.query.desde || 0;
@@ -18,7 +16,7 @@ app.get('/usuario', verificarToken, (req, res) => {
     Usuario.find(condicion, 'nombre email img role estado google ')
         .skip(desde)
         .limit(limit)
-        .find((err, usuariosDB) => {
+        .exec((err, usuariosDB) => {
             if (err) {
                 res.status(400).json({
                     ok: false,
