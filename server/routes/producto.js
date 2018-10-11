@@ -168,4 +168,5 @@ app.delete('/productos/:id', verificarToken, (req, res) => {
     });
 
 })
+
 module.exports = app;
